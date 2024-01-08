@@ -31,7 +31,7 @@ export class AuthService {
         }
     }
 
-    verify(token: string) {
+    verify(token: string): User {
         const decoded = this.jwtService.verify(token, {
             secret: process.env.jwtSecret
         })
