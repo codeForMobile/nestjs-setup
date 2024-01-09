@@ -1,12 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { UserDBModel, UserDocument } from "./schemas/user.schema";
-import { FilterQuery, Model } from "mongoose";
+import { Model } from "mongoose";
+import { EntityRepository } from "src/database/entity.repository";
 
 @Injectable()
-export class UsersRepository {
-    constructor(@InjectModel(UserDBModel.name) private userModel: Model<UserDocument>){}
-
+export class UsersRepository extends EntityRepository<UserDocument>{
+     constructor(@InjectModel(UserDBModel.name) userModel: Model<UserDocument>){
+        super(userModel)
+     }
+/*
     async findOne(userFilterQuery: FilterQuery<UserDBModel>): Promise<UserDBModel> {
         return this.userModel.findOne(userFilterQuery)
     }
@@ -22,7 +25,5 @@ export class UsersRepository {
 
     async findOneAndUpdate(userFilterQuery: FilterQuery<UserDBModel>, user: Partial<UserDBModel>): Promise<UserDBModel> {
         return this.userModel.findOneAndUpdate(userFilterQuery, user, {new: true})
-    }
-
-    // TODO:Delete
+    } */
 }
