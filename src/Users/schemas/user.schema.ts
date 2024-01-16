@@ -3,7 +3,7 @@ import { Document } from 'mongoose'
 
 export type UserDocument = UserDBModel & Document
 
-@Schema()
+@Schema({ collection: 'user'})
 export class UserDBModel {
 
     @Prop()
