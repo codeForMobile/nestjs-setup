@@ -7,8 +7,8 @@ import { CreateUserInput } from "./dto/input/create-user.input";
 import { UpdateUserInput } from "./dto/input/update-user.input";
 import { DeleteUserInput } from "./dto/input/delete-user.input";
 import { UseGuards } from "@nestjs/common";
-import { GqlAuthGuard } from "src/auth/guards/gql-auth.guard";
-import { CurrentUser } from "src/auth/current-user.decorator";
+import { GqlAuthGuard } from "../auth/guards/gql-auth.guard";
+import { CurrentUser } from "../auth/current-user.decorator";
 
 @Resolver(() => User)
 export class UsersResolver{
