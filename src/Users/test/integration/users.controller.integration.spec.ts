@@ -4,6 +4,7 @@ import * as request from 'supertest'
 import { AppModule } from "../../../app.module"
 import { DatabaseService } from "../../../database/database.service"
 import { userStub } from "../stubs/user.stub"
+import { CreateUserDbDto } from "../../../Users/dto/inputDb/create-userDB.dto"
 
 describe('UsersController', () => {
     let dbConnection: Connection
@@ -24,8 +25,11 @@ describe('UsersController', () => {
     })
 
     afterAll(async () => {
-        await dbConnection.collection('user').deleteMany({})
         await app.close()
+    })
+
+    beforeEach(async () => {
+        await dbConnection.collection('user').deleteMany({})
     })
 
     describe('getUsers', () => {
@@ -34,6 +38,23 @@ describe('UsersController', () => {
             const response = await request(httpServer).get('/users')
             expect(response.status).toBe(200)
             expect(response.body).toMatchObject([userStub()])
+        })
+    })
+
+    describe('createUser', ()=> {
+        it('should create a user', async () => {
+            const createUserRequest: CreateUserDbDto = {
+                email: userStub().email,
+                age: userStub().age
+            }
+            const response = await request(httpServer).post('/users').send(createUserRequest)
+            expect(response.status).toBe(201)
+            expect(response.body).toMatchObject(createUserRequest)
+
+            const user = await dbConnection.collection('user').findOne({
+                email: createUserRequest.email
+            })
+            expect(user).toMatchObject(createUserRequest)
         })
     })
 })
