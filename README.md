@@ -1,6 +1,8 @@
 ## nestjs-setup
 
 A minimal nestjs backend service built for a starter template.
+Currently not using any DB but in memory user list for op's.
+Exposes graphQL and rest endpoints for crud ops on User resource.
 
 ### Functionality
 
