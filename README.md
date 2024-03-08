@@ -1,4 +1,4 @@
-## nestjs-setup
+## nestjs graphQL endpoints with jwt and graphQL auth
 
 A minimal nestjs backend service built for a starter template.
 Currently not using any DB but in memory user list for op's.
@@ -17,6 +17,29 @@ Jwt authentication is implemented to
 
 - verify
   verifies jwt token and return authenticated user or else error.
+
+#### graphQL ops
+
+- createUser
+- updateUser
+- deleteUser
+- getUsers
+
+Following is behind graphQL auth guard while rest are not for the sake of demo.
+
+- getUser
+
+#### Rest ops
+
+- /:userid
+  to get single user
+
+- /
+  POST: for create user
+  GET: get all users
+
+- /:userId
+  PATCH: patch an existing resource
 
 ### scripts
 
